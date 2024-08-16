@@ -11,8 +11,8 @@
                 type="text"
                 class="form-control"
                 id="username"
-                @blur="() => validateName(true)"
-                @input="() => validateName(false)"
+                @blur="() => validateName(true) && validateUser(true)"
+                @input="() => validateName(false) && validateUser(false)"
                 v-model="formData.username"
               />
               <div v-if="errors.username" class="text-danger">{{ errors.username }}</div>
@@ -75,25 +75,13 @@
             <button type="button" class="btn btn-secondary" @click="clearForm">Clear</button>
           </div>
           <div class="row mt-5" v-if="submittedCards.length">
-            <div class="d-flex justify-content-start">
-              <div
-                v-for="(card, index) in submittedCards"
-                :key="index"
-                class="card m-2"
-                style="width: 18rem"
-              >
-                <div class="card-header">User Information</div>
-                <ul class="list-group list-group-flush">
-                  <li class="list-group-item">Username: {{ card.username }}</li>
-                  <li class="list-group-item">Password: {{ card.password }}</li>
-                  <li class="list-group-item">
-                    Australian Resident: {{ card.isAustralian ? 'Yes' : 'No' }}
-                  </li>
-                  <li class="list-group-item">Gender: {{ card.gender }}</li>
-                  <li class="list-group-item">Reason: {{ card.reason }}</li>
-                </ul>
-              </div>
-            </div>
+            <DataTable :value="submittedCards" tableStyle="min-width: 50rem">
+              <Column field="username" header="Username"></Column>
+              <Column field="password" header="Password"></Column>
+              <Column field="isAustralian" header="Australian Resident"></Column>
+              <Column field="gender" header="Gender"></Column>
+              <Column field="reason" header="Reason for joining"></Column>
+            </DataTable>
           </div>
         </form>
       </div>
@@ -104,6 +92,8 @@
 <script setup>
 // Our logic will go here
 import { ref } from 'vue'
+import DataTable from 'primevue/datatable'
+import Column from 'primevue/column'
 
 const formData = ref({
   username: '',
@@ -120,6 +110,7 @@ const submitForm = () => {
   validatePassword(true)
   validateGender(true)
   validateReason(true)
+  validateUser(true)
   if (
     !errors.value.username &&
     !errors.value.password &&
@@ -196,6 +187,17 @@ const validateReason = (blur) => {
     if (blur) errors.value.reason = 'Reason must be at least 10 characters'
   } else {
     errors.value.reason = null
+  }
+}
+
+const validateUser = (blur) => {
+  // Check if the username already exists in the submittedCards array
+  const isDuplicate = submittedCards.value.some((card) => card.username === formData.value.username)
+
+  if (isDuplicate) {
+    errors.value.username = 'This username has already been submitted'
+  } else {
+    errors.value.username = null
   }
 }
 </script>
