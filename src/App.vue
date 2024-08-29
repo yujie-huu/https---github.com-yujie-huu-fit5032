@@ -1,6 +1,6 @@
 <script setup>
 import JSON from './assets/json/JSON.vue'
-import Form from './components/Form.vue'
+import Form from './views/HomeView.vue'
 </script>
 
 <template>
