@@ -27,4 +27,15 @@ const router = createRouter({
   routes
 })
 
+router.beforeEach((to, from, next) => {
+  if (!store.state.isAuthenticated && to.name !== 'Login') {
+    return { name: 'Login' };
+  } else {
+    next();
+  }
+});
+
+
+
 export default router
+

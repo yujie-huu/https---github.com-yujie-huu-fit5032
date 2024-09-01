@@ -1,28 +1,24 @@
 <script setup>
 import BHeader from './components/BHeader.vue'
+import Homepage from './views/Homepage.vue';
 </script>
 
 <template>
   <h1 id="WebTitle">Monash Age Care</h1>
 
-  <header>
-    <BHeader />
-  </header>
-
-  <main class="main-box">
-    <router-view></router-view>
-  </main>
+  <Homepage></Homepage>
 </template>
 
 <style scoped>
 #WebTitle {
   font-size: 45px;
   font-family: 'Lucida Sans';
-  background-color: #3fe062;
+  background-color: #656fdfba;
   color: rgb(16, 16, 16);
   padding: 10px;
   border-radius: 10px 10px 0 0;
   text-align: center;
+  margin: 10px;
 }
 
 header {

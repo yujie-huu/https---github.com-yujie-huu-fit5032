@@ -31,10 +31,9 @@
               <button type="button" class="btn btn-secondary" @click="clearForm">Clear</button>
             </div>
           </form>
-          <br>
-          <div class="text-center">
-            <p class="small fw-bold mt-2 pt-1 mb-0">Don't have an account?</p>
-            <router-link to="/register" class="nav-link" active-class="active">Register</router-link>
+          <div class="row text-center mt-4">
+            <p class="fw-bold">Don't have an account?</p>
+            <router-link to="/register" class="nav-link fw-bold text-danger" active-class="active">Register</router-link>
           </div>
         </div>
       </div>
