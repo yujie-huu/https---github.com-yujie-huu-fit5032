@@ -10,7 +10,7 @@
           </router-link>
         </li>
         <li class="nav-item">
-          <router-link to="/rating" class="nav-link" active-class="active">Rating</router-link>
+          <router-link to="/login" class="nav-link" active-class="active">Login</router-link>
         </li>
       </ul>
     </header>
