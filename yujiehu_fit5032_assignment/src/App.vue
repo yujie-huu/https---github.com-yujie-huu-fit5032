@@ -3,6 +3,8 @@ import BHeader from './components/BHeader.vue'
 </script>
 
 <template>
+  <h1 id="WebTitle">Monash Age Care</h1>
+
   <header>
     <BHeader />
   </header>
@@ -13,6 +15,16 @@ import BHeader from './components/BHeader.vue'
 </template>
 
 <style scoped>
+#WebTitle {
+  font-size: 45px;
+  font-family: 'Lucida Sans';
+  background-color: #3fe062;
+  color: rgb(16, 16, 16);
+  padding: 10px;
+  border-radius: 10px 10px 0 0;
+  text-align: center;
+}
+
 header {
   line-height: 1.5;
 }
@@ -21,6 +33,8 @@ header {
   display: block;
   margin: 0 auto 2rem;
 }
+
+
 
 @media (min-width: 1024px) {
   header {
