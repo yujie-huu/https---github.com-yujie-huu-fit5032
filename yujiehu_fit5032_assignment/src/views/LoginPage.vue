@@ -1,137 +1,107 @@
 <template>
-    <div class="container mt-5">
-        <h1 class="text-center">User Information Form</h1>
+  <div class="container mt-5">
+    <div class="row">
+      <div class="col-md-6 col-sm-10 mt-5 pt-2">
+        <div>
+          <h1 class="text-center">Welcome to the Monash Age Care!</h1>
+        </div>
+        <div class="mt-5 text-center">
+          <p class="fs-3">We offer compassionate care and support services for the elderly, 
+            enhancing their quality of life through personalized assistance, social engagement, 
+            and a nurturing environment.</p>
+        </div>  
+      </div>
+      <div class="col-md-6 col-sm-10">
+        <h1 class="text-center">Login</h1>
         <form @submit.prevent="handleLogin">
-            <div class="row mb-3">
-                <div class="col-sm-6 mx-auto">
-                <label for="username" class="form-label text-start">Username</label>
-                <input
-                    type="email"
-                    class="form-control"
-                    id="username"
-                    v-model="formData.username"
-                />
-                </div>
+          <div class="row mb-3">
+            <div class="col-sm-6 mx-auto">
+              <label for="email" class="form-label text-start">UserEamil</label>
+              <input
+                type="email"
+                class="form-control"
+                id="email"
+                v-model="email"
+                required
+              />
             </div>
-            <div class="row mb-3">
-                <div class="col-sm-6  mx-auto">
-                <label for="password" class="form-label text-start">Password</label>
-                <input
-                    type="password"
-                    class="form-control"
-                    id="password"
-                    v-model="formData.password"
-                />
-                </div>
+          </div>
+          <div class="row mb-3">
+            <div class="col-sm-6  mx-auto">
+              <label for="password" class="form-label text-start">Password</label>
+              <input
+                type="password"
+                class="form-control"
+                id="password"
+                v-model="password"
+                required
+              />
             </div>
-            <div class="text-center">
-                <button type="submit" class="btn btn-primary me-2">Login</button>
-                <button type="button" class="btn btn-secondary" @click="clearForm">Clear</button>
-            </div>
+          </div>
+          <div class="text-center">
+              <button type="submit" class="btn btn-primary me-2">Login</button>
+          </div>
+          <!-- Display error message -->
+          <div v-if="errorMessage" class="text-danger text-center mt-3">
+            {{ errorMessage }}
+          </div>
         </form>
         <div class="row text-center mt-4">
         <p class="fw-bold">Don't have an account?</p>
         <router-link to="/register" class="nav-link fw-bold text-danger" active-class="active">Register</router-link>
         </div>
+      </div>
     </div>
+  </div>
 </template>
 
 
-<script>
+
+<script setup>
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
+import { defineEmits } from 'vue'
 
-const formData = ref({
-username: '',
-password: '',
-})
-  
-//   const submittedCards = ref([])
-  
-/*   const submitForm = () => {
-validatePassword(true)
-validateUser(true)
-if (
-    !errors.value.username &&
-    !errors.value.password &&
-) {
-    submittedCards.value.push({ ...formData.value })
-    clearForm()
+/**
+ * The router instance used for redirecting the user to the home page.
+ */
+const router = useRouter()
+
+/**
+ * Emits an event to the parent component to indicate that the user has been authenticated.
+ */
+const emit = defineEmits(['authenticated'])
+
+// Define reactive state for form inputs and error message
+const email = ref('')
+const password = ref('')
+const errorMessage = ref('')
+
+
+/**
+ * Hardcode username and password.
+ */
+const adminUsername = 'admin@monash'
+const adminPassword = 'admin123'
+
+/**
+ * Handles the form submission.
+ * @param {Event} event The form submission event.
+ * If the username and password are correct, the user is authenticated and redirected to the home page.
+ */
+const handleLogin = () => {
+  if (email.value === adminUsername && password.value === adminPassword) {
+    console.log('Login successful')
+    errorMessage.value = ''  // Clear the error message
+    emit('authenticated', true)  // Emit the authenticated event
+    router.push('/') // Navigate to homepage if login succeeded
+  } else {
+    console.log('Login failed')
+    errorMessage.value = 'Login failed. Please check your email and password and try again.'
+  }
 }
-} */
-
-/* const clearForm = () => {
-formData.value = {
-    username: '',
-    password: '',
-}
-}
-
-const errors = ref({
-username: null,
-password: null,
-}) */
-  
-  
-
-/*   const validateConfirmPassword = (blur) => {
-if (formData.value.password !== formData.value.confirmPassword) {
-    if (blur) errors.value.confirmPassword = 'Passwords do not match.'
-} else {
-    errors.value.confirmPassword = null
-}
-} */
-
-
-
-
-/* const validateUser = (blur) => {
-// Check if the username already exists in the submittedCards array
-const isDuplicate = submittedCards.value.some((card) => card.username === formData.value.username)
-
-if (isDuplicate) {
-    errors.value.username = 'This username has already been submitted'
-} else {
-    errors.value.username = null
-}
-} */
-
-
-import { mapActions } from 'vuex'
-
-export default {
-  data() {
-    return {
-      username: '',
-      password: '',
-    };
-  },
-  methods: {
-    ...mapActions(['login']),
-    handleLogin() {
-      const user = { username: this.username, password: this.password };
-      this.login(user);
-      this.$router.push({ name: 'Home' }); // Redirect to Home after login
-    }
-  },
-};
-
 </script>
 
 <style scoped>
-.card {
-border: 1px solid #ccc;
-border-radius: 10px;
-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-.card-header {
-background-color: #275fda;
-color: white;
-padding: 10px;
-border-radius: 10px 10px 0 0;
-text-align: center;
-}
-.list-group-item {
-padding: 10px;
-}
 </style>
   

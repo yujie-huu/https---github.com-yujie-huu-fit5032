@@ -1,12 +1,51 @@
 <script setup>
-// import BHeader from './components/BHeader.vue'
-import Homepage from './views/HomePage.vue';
+import { ref } from 'vue'
+
+import {RouterView } from 'vue-router'
+import HeaderSection from '@/components/HeaderSection.vue'
+// import Homepage from './views/HomePage.vue'
+import Toast from 'primevue/toast'
+import Loginpage from './views/LoginPage.vue'
+
+/**
+ * The current authentication status of the user.
+ * Resets to false at the start (every time page is reloaded)
+ */
+const isAuthenticated = ref(false)
+
+/**
+ * This function is called when the user logs in or logs out (via the LoginView component using an emit).
+ * @param value
+ */
+const handleAuthentication = (value) => {
+  isAuthenticated.value = value
+}
+
 </script>
 
-<template>
-  <h1 id="WebTitle">Monash Age Care</h1>
 
-  <Homepage></Homepage>
+<template>
+  <h1 id="WebTitle">Monash Age Care</h1> 
+  <Toast />
+  <div v-if="isAuthenticated == true">
+    <HeaderSection />
+
+    <div class="container">
+      <div class="row">
+        <div class="col-9 main-content">
+          <RouterView />
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- If user is not authenticated, then we force them to see the LoginView -->
+  <div v-else>
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-10 text-center">
+        <Loginpage @authenticated="handleAuthentication" />
+      </div>
+    </div>
+  </div>
 </template>
 
 <style scoped>
@@ -20,34 +59,5 @@ import Homepage from './views/HomePage.vue';
   text-align: center;
   margin: 20px;
   text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.5);
-}
-
-header {
-  line-height: 1.5;
-}
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
 }
 </style>

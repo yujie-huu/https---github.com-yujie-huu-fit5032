@@ -215,7 +215,7 @@
     }
   }
   
-  const validateUser = (blur) => {
+  const validateUser = () => {
     // Check if the username already exists in the submittedCards array
     const isDuplicate = submittedCards.value.some((card) => card.username === formData.value.username)
   
