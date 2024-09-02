@@ -1,13 +1,13 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import Homepage from '../views/Homepage.vue'
+import Homepage from '../views/HomePage.vue'
 import LoginPage from '@/views/LoginPage.vue'
 import RegisterPage from '@/views/RegisterPage.vue'
-
+import store from '@/store/store'
 
 const routes = [
   {
     path: '/',
-    name: 'Homepage',
+    name: 'Home page',
     component: Homepage
   },
   {
@@ -29,7 +29,7 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
   if (!store.state.isAuthenticated && to.name !== 'Login') {
-    return { name: 'Login' };
+    return { name: 'Login Page' };
   } else {
     next();
   }

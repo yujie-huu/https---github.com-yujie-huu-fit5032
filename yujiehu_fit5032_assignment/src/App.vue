@@ -1,6 +1,6 @@
 <script setup>
-import BHeader from './components/BHeader.vue'
-import Homepage from './views/Homepage.vue';
+// import BHeader from './components/BHeader.vue'
+import Homepage from './views/HomePage.vue';
 </script>
 
 <template>
@@ -18,7 +18,8 @@ import Homepage from './views/Homepage.vue';
   padding: 10px;
   border-radius: 10px 10px 0 0;
   text-align: center;
-  margin: 10px;
+  margin: 20px;
+  text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.5);
 }
 
 header {
