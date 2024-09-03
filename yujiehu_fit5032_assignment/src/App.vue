@@ -1,25 +1,29 @@
 <script setup>
-import { ref } from 'vue'
 
 import {RouterView } from 'vue-router'
-import HeaderSection from '@/components/HeaderSection.vue'
+// import { useRoute } from 'vue-router' 
 // import Homepage from './views/HomePage.vue'
 import Toast from 'primevue/toast'
 import Loginpage from './views/LoginPage.vue'
+import store from '@/store/store'
 
 /**
  * The current authentication status of the user.
  * Resets to false at the start (every time page is reloaded)
  */
-const isAuthenticated = ref(false)
+// const isAuthenticated = ref(false)
 
 /**
  * This function is called when the user logs in or logs out (via the LoginView component using an emit).
  * @param value
  */
-const handleAuthentication = (value) => {
-  isAuthenticated.value = value
+const handleAuthentication = (authenticate, username, usertype) => {
+  store.state.isAuthenticated = authenticate
+  store.state.user = username
+  store.state.usertype = usertype
 }
+
+//  const route = useRoute()
 
 </script>
 
@@ -27,9 +31,7 @@ const handleAuthentication = (value) => {
 <template>
   <h1 id="WebTitle">Monash Age Care</h1> 
   <Toast />
-  <div v-if="isAuthenticated == true">
-    <HeaderSection />
-
+  <div v-if="store.state.isAuthenticated == true"> 
     <div class="container">
       <div class="row">
         <div class="col-9 main-content">

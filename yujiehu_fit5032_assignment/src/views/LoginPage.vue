@@ -47,8 +47,8 @@
           </div>
         </form>
         <div class="row text-center mt-4">
-        <p class="fw-bold">Don't have an account?</p>
-        <router-link to="/register" class="nav-link fw-bold text-danger" active-class="active">Register</router-link>
+          <p class="fw-bold">Don't have an account?</p>
+          <RouterLink to="/register" class="nav-link active fw-bold text-danger">Register</RouterLink>
         </div>
       </div>
     </div>
@@ -61,6 +61,7 @@
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { defineEmits } from 'vue'
+import { RouterLink } from 'vue-router'
 
 /**
  * The router instance used for redirecting the user to the home page.
@@ -84,22 +85,31 @@ const errorMessage = ref('')
 const adminUsername = 'admin@monash'
 const adminPassword = 'admin123'
 
+const commonUsername = 'age@monash'
+const commonPassword = 'password'
+
 /**
  * Handles the form submission.
  * @param {Event} event The form submission event.
  * If the username and password are correct, the user is authenticated and redirected to the home page.
  */
-const handleLogin = () => {
+ const handleLogin = () => {
   if (email.value === adminUsername && password.value === adminPassword) {
+    console.log('Login successful,admin')
+    errorMessage.value = ''  // Clear the error message
+    emit('authenticated', true, email, 'admin')  // Emit the authenticated event
+    router.replace('/admin') // Navigate to admin homepage if login succeeded
+  } else if (email.value === commonUsername && password.value === commonPassword) {
     console.log('Login successful')
     errorMessage.value = ''  // Clear the error message
-    emit('authenticated', true)  // Emit the authenticated event
-    router.push('/') // Navigate to homepage if login succeeded
+    emit('authenticated', true, email, 'aged user')  // Emit the authenticated event
+    router.replace('/home') // Navigate to homepage if login succeeded
   } else {
     console.log('Login failed')
     errorMessage.value = 'Login failed. Please check your email and password and try again.'
   }
 }
+
 </script>
 
 <style scoped>

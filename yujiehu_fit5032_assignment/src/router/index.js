@@ -3,10 +3,12 @@ import Homepage from '../views/HomePage.vue'
 import Loginpage from '@/views/LoginPage.vue'
 import Registerpage from '@/views/RegisterPage.vue'
 import store from '@/store/store'
+import Adminhome from '@/views/AdminHomepage.vue'
+import Health from '@/views/HealthView.vue'
 
 const routes = [
   {
-    path: '/',
+    path: '/home',
     name: 'Home page',
     component: Homepage
   },
@@ -19,7 +21,12 @@ const routes = [
     path: '/register',
     name: 'Register Page',
     component: Registerpage
-  }
+  },
+  {
+    path: '/admin',
+    name: 'Admin Home',
+    component: Adminhome
+  },
 ]
 
 const router = createRouter({
@@ -28,8 +35,8 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  if (!store.state.isAuthenticated && to.name !== 'Login') {
-    return { name: 'Login Page' };
+  if (store.state.isAuthenticated == false && to.name !== 'Login Page' && to.name !== 'Register Page') {
+    next ({ name: 'Login Page' });
   } else {
     next();
   }
