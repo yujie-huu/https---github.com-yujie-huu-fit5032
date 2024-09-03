@@ -11,7 +11,7 @@
             and a nurturing environment.</p>
         </div>  
       </div>
-      <div class="col-md-6 col-sm-10">
+      <div class="col-md-6 col-sm-10 mt-5 pt-2">
         <h1 class="text-center">Login</h1>
         <form @submit.prevent="handleLogin">
           <div class="row mb-3">
@@ -60,8 +60,9 @@
 <script setup>
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
-import { defineEmits } from 'vue'
+// import { defineEmits } from 'vue'
 import { RouterLink } from 'vue-router'
+import store from '@/store/store'
 
 /**
  * The router instance used for redirecting the user to the home page.
@@ -71,7 +72,7 @@ const router = useRouter()
 /**
  * Emits an event to the parent component to indicate that the user has been authenticated.
  */
-const emit = defineEmits(['authenticated'])
+// const emit = defineEmits(['authenticated'])
 
 // Define reactive state for form inputs and error message
 const email = ref('')
@@ -97,12 +98,18 @@ const commonPassword = 'password'
   if (email.value === adminUsername && password.value === adminPassword) {
     console.log('Login successful,admin')
     errorMessage.value = ''  // Clear the error message
-    emit('authenticated', true, email, 'admin')  // Emit the authenticated event
-    router.replace('/admin') // Navigate to admin homepage if login succeeded
+    // emit('authenticated', true, email, 'admin')  // Emit the authenticated event
+    store.state.isAuthenticated = true
+    store.state.user = email
+    store.state.usertype = 'admin'
+    router.replace('/home') // Navigate to homepage if login succeeded
   } else if (email.value === commonUsername && password.value === commonPassword) {
     console.log('Login successful')
     errorMessage.value = ''  // Clear the error message
-    emit('authenticated', true, email, 'aged user')  // Emit the authenticated event
+    // emit('authenticated', true, email, 'aged user')  // Emit the authenticated event
+    store.state.isAuthenticated = true
+    store.state.user = email
+    store.state.usertype = 'aged user'
     router.replace('/home') // Navigate to homepage if login succeeded
   } else {
     console.log('Login failed')

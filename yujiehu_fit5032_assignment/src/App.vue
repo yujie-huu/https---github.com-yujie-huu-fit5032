@@ -4,25 +4,24 @@ import {RouterView } from 'vue-router'
 // import { useRoute } from 'vue-router' 
 // import Homepage from './views/HomePage.vue'
 import Toast from 'primevue/toast'
-import Loginpage from './views/LoginPage.vue'
-import store from '@/store/store'
+// import store from '@/store/store'
 import HeaderSection from './components/HeaderSection.vue'
 
 /**
  * The current authentication status of the user.
  * Resets to false at the start (every time page is reloaded)
  */
-// const isAuthenticated = ref(false)
+/* const isAuthenticated = ref(false)
 
 /**
  * This function is called when the user logs in or logs out (via the LoginView component using an emit).
  * @param value
  */
-const handleAuthentication = (authenticate, username, usertype) => {
+/* const handleAuthentication = (authenticate, username, usertype) => {
   store.state.isAuthenticated = authenticate
   store.state.user = username
   store.state.usertype = usertype
-}
+} */
 
 //  const route = useRoute()
 
@@ -32,8 +31,12 @@ const handleAuthentication = (authenticate, username, usertype) => {
 <template>
   <h1 id="WebTitle">Monash Age Care</h1> 
   <Toast />
-  <HeaderSection />
-  <div v-if="store.state.isAuthenticated == true"> 
+  <div>
+    <HeaderSection />
+  </div>
+  
+  <RouterView />
+  <!-- <div v-if="store.state.isAuthenticated == true"> 
     <div class="container">
       <div class="row">
         <div class="col-9 main-content">
@@ -41,15 +44,16 @@ const handleAuthentication = (authenticate, username, usertype) => {
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
   <!-- If user is not authenticated, then we force them to see the LoginView -->
-  <div v-else>
+  <!-- <div v-else>
     <div class="row d-flex justify-content-center align-items-center h-100">
       <div class="col-10 text-center">
-        <Loginpage @authenticated="handleAuthentication" />
+        <RouterView /> 
+        //<Loginpage @authenticated="handleAuthentication" />
       </div>
     </div>
-  </div>
+  </div> -->
 </template>
 
 <style scoped>

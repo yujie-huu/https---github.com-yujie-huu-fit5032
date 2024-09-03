@@ -3,7 +3,6 @@ import Homepage from '../views/HomePage.vue'
 import Loginpage from '@/views/LoginPage.vue'
 import Registerpage from '@/views/RegisterPage.vue'
 import store from '@/store/store'
-import Adminhome from '@/views/AdminHomepage.vue'
 import HealthProvider from '@/views/HealthProvider.vue'
 
 const routes = [
@@ -23,11 +22,6 @@ const routes = [
     component: Registerpage
   },
   {
-    path: '/admin',
-    name: 'Admin Home',
-    component: Adminhome
-  },
-  {
     path: '/provider',
     name: 'Health Provider',
     component: HealthProvider
@@ -42,6 +36,8 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
   if (store.state.isAuthenticated == false && to.name !== 'Login Page' && to.name !== 'Register Page') {
     next ({ name: 'Login Page' });
+  } else if (store.state.usertype == 'admin' && to.name == 'Health Provider') { //admin cannot access health provider page
+    next ({ name: 'Home page' });
   } else {
     next();
   }

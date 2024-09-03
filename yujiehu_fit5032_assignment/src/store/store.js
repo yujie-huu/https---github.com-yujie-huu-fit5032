@@ -41,10 +41,10 @@ export default createStore({
         setusertype(state, usertype) {
             state.usertype = usertype;
         },
-        addRating(state, providerId, rating) {
+        addRating(state, {providerId, rating}) {
             const provider = state.providers.find(p => p.id === providerId);
-            if (provider) {
-              provider.ratings.push(rating);
+            if (provider) { //if the provider exist
+              provider.ratings.push(rating); // add the new rating to the rating list
             }
         }
     },
@@ -59,13 +59,9 @@ export default createStore({
             commit('setuser', null);
             commit('setusertype', null);
         },
-    },
-    getters: {
-        averageRating: (state) => (providerId) => {
-            const ratings = state.providerRatings[providerId] || [];
-            if (ratings.length === 0) return 0;
-            const total = ratings.reduce((sum, rating) => sum + rating, 0);
-            return (total / ratings.length).toFixed(1); // Return average rating with one decimal place
-        },
+        updateRating({ commit }, { providerId, rating }) {
+            commit('addRating', { providerId, rating });
+            console.log('Rating updated:', rating);
+        }
     }
 });
