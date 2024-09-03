@@ -11,7 +11,7 @@ import { RouterLink } from 'vue-router'
             <RouterLink to="/home" class="nav-link active" aria-current="page">Home</RouterLink>
           </li>
           <li class="nav-item">
-            <RouterLink to="/health" class="nav-link">My Health</RouterLink>
+            <RouterLink to="/provider" class="nav-link">Health Provider</RouterLink>
           </li>
         </ul>
       </div>

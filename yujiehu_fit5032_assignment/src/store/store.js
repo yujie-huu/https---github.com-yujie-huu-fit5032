@@ -4,7 +4,6 @@ export default createStore({
         isAuthenticated: false,
         user: null,
         usertype: null,
-        providerRatings: {}, // Object to store ratings by provider ID
     },
     mutations: {
         setAuthentication(state, status) {
@@ -15,7 +14,7 @@ export default createStore({
         },
         setusertype(state, usertype) {
             state.usertype = usertype;
-        },
+        }
     },
     actions: {
         login({ commit }, user, usertype) {

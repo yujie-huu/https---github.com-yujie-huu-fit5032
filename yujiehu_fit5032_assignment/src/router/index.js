@@ -4,7 +4,7 @@ import Loginpage from '@/views/LoginPage.vue'
 import Registerpage from '@/views/RegisterPage.vue'
 import store from '@/store/store'
 import Adminhome from '@/views/AdminHomepage.vue'
-import Health from '@/views/HealthView.vue'
+import Provider from '@/views/HealthProvider.vue'
 
 const routes = [
   {
@@ -26,6 +26,11 @@ const routes = [
     path: '/admin',
     name: 'Admin Home',
     component: Adminhome
+  },
+  {
+    path: '/provider',
+    name: 'Health Provider',
+    component: Provider
   },
 ]
 
