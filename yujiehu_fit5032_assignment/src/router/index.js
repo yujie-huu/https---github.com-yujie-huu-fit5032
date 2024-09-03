@@ -4,7 +4,7 @@ import Loginpage from '@/views/LoginPage.vue'
 import Registerpage from '@/views/RegisterPage.vue'
 import store from '@/store/store'
 import Adminhome from '@/views/AdminHomepage.vue'
-import Provider from '@/views/HealthProvider.vue'
+import HealthProvider from '@/views/HealthProvider.vue'
 
 const routes = [
   {
@@ -30,7 +30,7 @@ const routes = [
   {
     path: '/provider',
     name: 'Health Provider',
-    component: Provider
+    component: HealthProvider
   },
 ]
 

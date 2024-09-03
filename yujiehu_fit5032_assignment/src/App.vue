@@ -6,6 +6,7 @@ import {RouterView } from 'vue-router'
 import Toast from 'primevue/toast'
 import Loginpage from './views/LoginPage.vue'
 import store from '@/store/store'
+import HeaderSection from './components/HeaderSection.vue'
 
 /**
  * The current authentication status of the user.
@@ -31,6 +32,7 @@ const handleAuthentication = (authenticate, username, usertype) => {
 <template>
   <h1 id="WebTitle">Monash Age Care</h1> 
   <Toast />
+  <HeaderSection />
   <div v-if="store.state.isAuthenticated == true"> 
     <div class="container">
       <div class="row">
