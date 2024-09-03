@@ -85,7 +85,7 @@ const errorMessage = ref('')
  * Hardcode username and password.
  */
 const adminUsername = 'admin@monash'
-const adminPassword = 'admin123'
+
 
 // const commonUsername = 'age@monash'
 // const commonPassword = 'password'
@@ -102,7 +102,7 @@ const adminPassword = 'admin123'
   );
 
   if (user){
-    if (user.username === adminUsername && user.password === adminPassword) {
+    if (user.username === adminUsername && user.password === password.value) {
       console.log('Login successful, admin')
       errorMessage.value = ''  // Clear the error message
       // emit('authenticated', true, email, 'admin')  // Emit the authenticated event
