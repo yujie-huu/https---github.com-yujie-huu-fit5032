@@ -63,6 +63,7 @@ import { useRouter } from 'vue-router'
 // import { defineEmits } from 'vue'
 import { RouterLink } from 'vue-router'
 import store from '@/store/store'
+import { userAccounts } from '@/store/userAccount'
 
 /**
  * The router instance used for redirecting the user to the home page.
@@ -86,8 +87,8 @@ const errorMessage = ref('')
 const adminUsername = 'admin@monash'
 const adminPassword = 'admin123'
 
-const commonUsername = 'age@monash'
-const commonPassword = 'password'
+// const commonUsername = 'age@monash'
+// const commonPassword = 'password'
 
 /**
  * Handles the form submission.
@@ -95,25 +96,36 @@ const commonPassword = 'password'
  * If the username and password are correct, the user is authenticated and redirected to the home page.
  */
  const handleLogin = () => {
-  if (email.value === adminUsername && password.value === adminPassword) {
-    console.log('Login successful,admin')
-    errorMessage.value = ''  // Clear the error message
-    // emit('authenticated', true, email, 'admin')  // Emit the authenticated event
-    store.state.isAuthenticated = true
-    store.state.user = email
-    store.state.usertype = 'admin'
-    router.replace('/home') // Navigate to homepage if login succeeded
-  } else if (email.value === commonUsername && password.value === commonPassword) {
-    console.log('Login successful')
-    errorMessage.value = ''  // Clear the error message
-    // emit('authenticated', true, email, 'aged user')  // Emit the authenticated event
-    store.state.isAuthenticated = true
-    store.state.user = email
-    store.state.usertype = 'aged user'
-    router.replace('/home') // Navigate to homepage if login succeeded
-  } else {
+  // find the user account
+  const user = userAccounts.find(
+    (account) => account.username === email.value
+  );
+
+  if (user){
+    if (user.username === adminUsername && user.password === adminPassword) {
+      console.log('Login successful, admin')
+      errorMessage.value = ''  // Clear the error message
+      // emit('authenticated', true, email, 'admin')  // Emit the authenticated event
+      store.state.isAuthenticated = true
+      store.state.user = email
+      store.state.usertype = 'admin'
+      router.replace('/home') // Navigate to homepage if login succeeded
+    } else if (user && user.password === password.value) {
+      console.log('Login successful, normal user')
+      errorMessage.value = ''  // Clear the error message
+      // emit('authenticated', true, email, 'aged user')  // Emit the authenticated event
+      store.state.isAuthenticated = true
+      store.state.user = email
+      store.state.usertype = 'aged user'
+      router.replace('/home') // Navigate to homepage if login succeeded
+    }
+    else {
+      console.log('Login failed')
+      errorMessage.value = 'Login failed. Please check your email and password and try again.'
+    }
+  }else {
     console.log('Login failed')
-    errorMessage.value = 'Login failed. Please check your email and password and try again.'
+    errorMessage.value = 'Login failed. This email is not registered.'
   }
 }
 

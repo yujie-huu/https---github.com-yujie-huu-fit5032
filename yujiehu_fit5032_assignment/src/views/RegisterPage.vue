@@ -96,6 +96,7 @@
 <script setup>
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
+import { userAccounts } from '@/store/userAccount';
 
 
 /**
@@ -112,7 +113,7 @@ const formData = ref({
   gender: '',
 })
 
-const submittedCards = ref([])
+// const submittedCards = ref([])
 
 const submitForm = () => {
   validatePassword(true)
@@ -127,8 +128,13 @@ const submitForm = () => {
     !errors.value.gender &&
     !errors.value.age
   ) {
-    submittedCards.value.push({ ...formData.value })
-    router.push('/login') // Navigate to login page if login succeeded
+    // submittedCards.value.push({ ...formData.value })
+    // Push new user data into the userAccounts array
+    userAccounts.push({ ...formData.value })
+    console.log('New user account added:', formData.value)
+    
+    // Navigate to login page if login succeeded
+    router.push('/login') 
     clearForm()
   }
 }
@@ -212,7 +218,9 @@ const validateAge = (blur) => {
 
 const validateUser = (blur) => {
   // Check if the username already exists in the submittedCards array
-  const isDuplicate = submittedCards.value.some((card) => card.username === formData.value.username)
+  // const isDuplicate = submittedCards.value.some((card) => card.username === formData.value.username)
+  // Check if the username already exists in the userAccounts array
+  const isDuplicate = userAccounts.some((user) => user.username === formData.value.username)
   // Check if the username is in email format
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
   const hasValidEmailFormat = emailRegex.test(formData.value.username)
