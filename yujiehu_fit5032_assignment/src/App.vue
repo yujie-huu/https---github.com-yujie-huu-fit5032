@@ -7,23 +7,6 @@ import Toast from 'primevue/toast'
 // import store from '@/store/store'
 import HeaderSection from './components/HeaderSection.vue'
 
-/**
- * The current authentication status of the user.
- * Resets to false at the start (every time page is reloaded)
- */
-/* const isAuthenticated = ref(false)
-
-/**
- * This function is called when the user logs in or logs out (via the LoginView component using an emit).
- * @param value
- */
-/* const handleAuthentication = (authenticate, username, usertype) => {
-  store.state.isAuthenticated = authenticate
-  store.state.user = username
-  store.state.usertype = usertype
-} */
-
-//  const route = useRoute()
 
 </script>
 
@@ -36,24 +19,7 @@ import HeaderSection from './components/HeaderSection.vue'
   </div>
   
   <RouterView />
-  <!-- <div v-if="store.state.isAuthenticated == true"> 
-    <div class="container">
-      <div class="row">
-        <div class="col-9 main-content">
-          <RouterView />
-        </div>
-      </div>
-    </div>
-  </div> -->
-  <!-- If user is not authenticated, then we force them to see the LoginView -->
-  <!-- <div v-else>
-    <div class="row d-flex justify-content-center align-items-center h-100">
-      <div class="col-10 text-center">
-        <RouterView /> 
-        //<Loginpage @authenticated="handleAuthentication" />
-      </div>
-    </div>
-  </div> -->
+
 </template>
 
 <style scoped>
