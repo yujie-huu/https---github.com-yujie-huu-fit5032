@@ -2,7 +2,6 @@
     <div class="container mt-5">
         <h2 class="mt-2">User Info</h2>
         <p class="mt-2"> username: {{currentUser?.username}}</p>
-        <p class="mt-2"> password: {{currentUser?.password}}</p>
     </div>
 
 </template>

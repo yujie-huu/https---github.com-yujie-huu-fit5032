@@ -1,3 +1,19 @@
+<script setup>
+import { defineEmits } from 'vue'
+import router from '@/router'
+
+const emit = defineEmits(['authenticated'])
+
+const logMeOut = () => {
+  console.log('Logging out')
+  localStorage.removeItem('isLoggedIn')
+  localStorage.removeItem('userEmail')
+  emit('authenticated', false)
+  router.push('/')
+  // location.reload()
+}
+</script>
+
 <template>
   <!-- Using Bootstrap's Header template (starter code) -->
   <!-- https://getbootstrap.com/docs/5.0/examples/headers/ -->
@@ -5,19 +21,39 @@
     <header class="d-flex justify-content-center py-3">
       <ul class="nav nav-pills">
         <li class="nav-item">
-          <router-link to="/" class="nav-link" active-class="active" aria-current="page">Home</router-link>
+          <router-link to="/" class="nav-link" active-class="active" aria-current="page"
+            >Home</router-link
+          >
         </li>
         <li class="nav-item">
           <router-link to="/about" class="nav-link" active-class="active">About</router-link>
         </li>
         <li class="nav-item">
-          <router-link to="/FireLogin" class="nav-link" active-class="active">Firebase Login</router-link>
+          <router-link to="/FireLogin" class="nav-link" active-class="active"
+            >Firebase Login</router-link
+          >
         </li>
         <li class="nav-item">
-          <router-link to="/FireRegister" class="nav-link" active-class="active">Firebase Register</router-link>
+          <router-link to="/FireRegister" class="nav-link" active-class="active"
+            >Firebase Register</router-link
+          >
         </li>
         <li class="nav-item">
           <router-link to="/addbook" class="nav-link" active-class="active">Add Book</router-link>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link" @click="logMeOut">Logout</a>
+        </li>
+        <li class="nav-item">
+          <router-link to="/getBookCount" class="nav-link" active-class="active"
+            >Get Book Count</router-link
+          >
+        </li>
+        <li class="nav-item">
+          <router-link to="/weatherCheck" class="nav-link" active-class="active">Get Weather</router-link>
+        </li>
+        <li class="nav-item">
+          <router-link to="/countBook" class="nav-link" active-class="active">Count Book API</router-link>
         </li>
       </ul>
     </header>

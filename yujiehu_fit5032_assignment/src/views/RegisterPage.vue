@@ -217,8 +217,6 @@ const validateAge = (blur) => {
 }
 
 const validateUser = (blur) => {
-  // Check if the username already exists in the submittedCards array
-  // const isDuplicate = submittedCards.value.some((card) => card.username === formData.value.username)
   // Check if the username already exists in the userAccounts array
   const isDuplicate = userAccounts.some((user) => user.username === formData.value.username)
   // Check if the username is in email format

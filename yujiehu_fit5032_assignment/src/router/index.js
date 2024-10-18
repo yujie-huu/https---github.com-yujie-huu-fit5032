@@ -4,6 +4,8 @@ import Loginpage from '@/views/LoginPage.vue'
 import Registerpage from '@/views/RegisterPage.vue'
 import store from '@/store/store'
 import HealthProvider from '@/views/HealthProvider.vue'
+import FirebaseSigninView from '../views/FirebaseSigninView.vue'
+import FirebaseRegisterView from '../views/FirebaseRegisterView.vue'
 
 const routes = [
   {
@@ -26,6 +28,16 @@ const routes = [
     name: 'Health Provider',
     component: HealthProvider
   },
+  {
+    path: '/FireLogin',
+    name: 'FireLogin',
+    component: FirebaseSigninView
+  },
+  {
+    path: '/FireRegister',
+    name: 'FireRegister',
+    component: FirebaseRegisterView
+  }
 ]
 
 const router = createRouter({
